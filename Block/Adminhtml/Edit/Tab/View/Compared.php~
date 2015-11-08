@@ -36,12 +36,11 @@ class Compared extends \Magento\Backend\Block\Widget\Grid\Extended
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Backend\Helper\Data $backendHelper,
-        \Magento\Catalog\Model\Resource\Product\Compare\Item\CollectionFactory $collectionFactory,
+        \Magento\Catalog\Model\ResourceModel\Product\Compare\Item\CollectionFactory $collectionFactory,
         \Magento\Framework\Registry $coreRegistry,
-        \Psr\Log\LoggerInterface $logger,
         array $data = []
     ) {
-		 $this->_logger = $logger;
+		
         $this->_coreRegistry = $coreRegistry;
         $this->_collectionFactory = $collectionFactory;
         parent::__construct($context, $backendHelper, $data);
@@ -55,13 +54,17 @@ class Compared extends \Magento\Backend\Block\Widget\Grid\Extended
     protected function _construct()
     {
         parent::_construct();
-        $this->setId('comparedproduct_view_compared_grid');
+        //$this->setId('comparedproduct_view_compared_grid');
         $this->setDefaultSort('created_at', 'desc');
         $this->setSortable(false);
         $this->setPagerVisibility(false);
         $this->setFilterVisibility(false);
     }
-
+    protected function _prepareGrid()
+    {
+        $this->setId('comparedproduct_view_compared_grid' . $this->getWebsiteId());
+        parent::_prepareGrid();
+    }
     /**
      * {@inheritdoc}
      */
@@ -77,7 +80,7 @@ class Compared extends \Magento\Backend\Block\Widget\Grid\Extended
     {
         $collection = $this->_collectionFactory->create()->setCustomerId(
             $this->_coreRegistry->registry(RegistryConstants::CURRENT_CUSTOMER_ID)
-        )->useProductItem()->addAttributeToSelect(array("name","price"))->loadComparableAttributes();
+        )->useProductItem()->addAttributeToSelect(array("name","price"));
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
