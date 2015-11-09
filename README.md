@@ -3,3 +3,7 @@ new Magento 2 extension from www.ibnab.com for  showing all product in compare f
 Custom  tab in customer view
 Custom grid
 More article and extensions Magento 2 visit  www.ibnab.com/en/blog/magento-2
+
+
+More Free Magento2 Extensions :
+http://www.ibnab.com/en/resource
