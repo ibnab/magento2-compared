@@ -11,7 +11,7 @@ class Compare extends \Magento\Customer\Controller\Adminhtml\Index
      *
      * @return \Magento\Framework\View\Result\Layout
      */
-    public function executeInternal()
+    public function execute()
     {
         $this->initCurrentCustomer();
         $resultLayout = $this->resultLayoutFactory->create();
